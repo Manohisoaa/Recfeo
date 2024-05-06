@@ -1,6 +1,6 @@
 import logo from "../assets/logo.png"
 import { useNavigate } from "react-router-dom"
-import { Button } from "../components/Bouton";
+// import { Button } from "../components/Bouton";
 
 
 function Accueil() {
