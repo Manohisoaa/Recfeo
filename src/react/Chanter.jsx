@@ -1,7 +1,7 @@
 import logo from "../assets/logo.png"
-import { CircleStop, Headphones, Import, Menu, Mic, RotateCcw, Trash2 } from "lucide-react"
+import { CircleStop, Headphones, Import, Menu, Mic, RotateCcw, Trash2, FileUp } from "lucide-react"
 import Modal from "../components/Modal"
-import { useState} from "react"
+import { useState, useEffect, useRef} from "react"
 
 export default function Chanter() {
 const [showModal, setModal] = useState(false);
@@ -9,20 +9,24 @@ const [showMenu, setMenu] = useState(true);
 
 // fonction Menu manokatra ilay modal
 const functionOuvrir = () =>{
-  setModal(true);
+  setModal(!showModal);
   setMenu(false)
 }
 
-//  const menuRef = useRef();
-//   useEffect(() => {
-//     let handler = (e) => {
-//       if (!menuRef.current.contains(e.target)){
-//         setModal(false)
-//       }
+  //  menuRef = useRef()
+  // useEffect(() => {
+  //   let handler = (e) => {
+  //     if (!menuRef.current.contains(e.target)){
+  //       setModal(false);
+  //     }
       
-//     };
-//     document.addEventListener("mousedown", handler)
-//   })
+  //   };
+  //   document.addEventListener("mousedown", handler);
+
+  //   return() =>{
+  //     document.removeEventListener("mousedown", handler);
+  //   };
+  // },[])
 
 
   return (
@@ -33,7 +37,7 @@ const functionOuvrir = () =>{
         <div>
           {showMenu && <Menu onClick={functionOuvrir} color="white" size={40} className="cursor-pointer"/> }
         </div>
-        { showModal && <Modal functionOuvrir={functionOuvrir} /> }
+        { showModal && <Modal functionOuvrir={functionOuvrir} text={"Importer"} name="FileUp"/> }
       </div>
     
       {/* Micro sy bouton prêt   */}
