@@ -1,7 +1,7 @@
 import logo from "../assets/logo.png"
-import { CircleStop, Headphones, Import, Menu, Mic, RotateCcw, Trash2, FileUp } from "lucide-react"
-import Modal from "../components/Modal"
-import { useState, useEffect, useRef} from "react"
+import { CircleStop, Headphones, Import, Menu, Mic, RotateCcw, Trash2, FileUp, Sun } from "lucide-react"
+// import Modal from "../components/Modal"
+import { useState, } from "react"
 
 export default function Chanter() {
 const [showModal, setModal] = useState(false);
@@ -13,31 +13,23 @@ const functionOuvrir = () =>{
   setMenu(false)
 }
 
-  //  menuRef = useRef()
-  // useEffect(() => {
-  //   let handler = (e) => {
-  //     if (!menuRef.current.contains(e.target)){
-  //       setModal(false);
-  //     }
-      
-  //   };
-  //   document.addEventListener("mousedown", handler);
 
-  //   return() =>{
-  //     document.removeEventListener("mousedown", handler);
-  //   };
-  // },[])
 
 
   return (
     // logo sy Menu
     <div className="bg-[#0A132D] h-screen fixed w-full  ">
-      <div className="flex justify-between m-10">
+      <div className="flex justify-between m-10 items-center">
         <img src={logo} className="h-20" />
-        <div>
+        <div className="flex items-center">
+          <a href=" " className="text-white p-6 text-2xl cursor-pointer bg-gradient-to-r from-cyan-500 to-blue-500">Enregistrement</a>
+          <a href=" "className="text-white p-6 text-2xl cursor-pointer">Importer</a>
+          <Sun color='white' size={40} className='m-4 cursor-pointer'/>
+        </div>
+        {/* <div>
           {showMenu && <Menu onClick={functionOuvrir} color="white" size={40} className="cursor-pointer"/> }
         </div>
-        { showModal && <Modal functionOuvrir={functionOuvrir} text={"Importer"} name="FileUp"/> }
+        { showModal && <Modal functionOuvrir={functionOuvrir} text={"Importer"} name="FileUp"/> } */}
       </div>
     
       {/* Micro sy bouton prêt   */}

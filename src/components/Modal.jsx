@@ -7,20 +7,20 @@ function Modal({text, name}) {
   
   return (
 
-      <div className="bg-[#0A153B] h-52 w-64 rounded-xl flex items-center justify-center absolute right-0  ">
+      <div className="bg-[#0A153B] h-64 w-72 rounded-xl flex items-center justify-center absolute right-16   ">
         
         {/* icône */}
          <div className=" flex flex-col ">
-            <SaveAll color='white' size={40} className='m-1.5'/>
-            <IconComponent color={"white"} size={40} className='m-1.5'/>  
-            <Sun color='white' size={40} className='m-1.5'/>
+            <SaveAll color='white' size={40} className='m-4'/>
+            <IconComponent color={"white"} size={40} className='m-4'/>  
+            <Sun color='white' size={40} className='m-4'/>
         </div>
 
         {/* Lien icone */}
         <div className=" flex flex-col ">
-            <a href="" className="text-white text-xl m-3.5 ">Enregistrement</a>
-            <a href="" className="text-white text-xl m-3.5 ">{text}</a>
-            <a href="" className="text-white text-xl m-3.5 ">Mode</a>
+            <a href="" className="text-white text-2xl m-6 ">Enregistrement</a>
+            <a href="" className="text-white text-2xl m-6 ">{text}</a>
+            <a href="" className="text-white text-2xl m-6 ">Mode</a>
         </div>
       </div>
   )
