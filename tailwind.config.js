@@ -36,4 +36,5 @@ export default {
     // import('@tailwindcss/forms'),
     import('preline/plugin'),
   ],
+  darkMode: "class",
 };

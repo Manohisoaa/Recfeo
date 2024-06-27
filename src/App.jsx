@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Accueil from "./react/Accueil";
 import Chanter from "./react/Chanter";
 import Import from "./react/Import";
+import Enregistrement from "./react/Enregistrement"
+
 import "preline";
 
 function App() {
@@ -18,7 +20,9 @@ function App() {
         <Route path="/" element={<Accueil />} />
         <Route path="/chanter" element={<Chanter />} />
         <Route path="/importer" element={<Import />} />
+        <Route path="/enregistrement" element={<Enregistrement />} />
       </Routes>
+
     </div>
   );
 }
