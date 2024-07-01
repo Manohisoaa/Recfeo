@@ -4,6 +4,7 @@ import Accueil from "./react/Accueil";
 import Chanter from "./react/Chanter";
 import Import from "./react/Import";
 import Enregistrement from "./react/Enregistrement"
+import Aide from "./react/Aide";
 
 import "preline";
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/chanter" element={<Chanter />} />
         <Route path="/importer" element={<Import />} />
         <Route path="/enregistrement" element={<Enregistrement />} />
+        <Route path="/aide" element={<Aide />} />
       </Routes>
 
     </div>

@@ -1,11 +1,11 @@
 import logo from "../assets/logo.png"
-import {Sun, Moon, FileDown } from "lucide-react"
+import {Sun, Moon } from "lucide-react"
 import ispm from "../assets/ispm.png"
 import { Link } from "react-router-dom"
 // import Modal from "../components/Modal"
-import { useState, useEffect, useRef } from "react"
+import { useState } from "react"
 
-export default function Import() {
+export default function Aide() {
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
@@ -16,6 +16,7 @@ export default function Import() {
     color: darkMode? "white" : "#0A132D"
   };
 
+  
 
   return (
     // logo sy Menu 
@@ -54,13 +55,7 @@ export default function Import() {
           </nav>
         </header>
 
-        {/* Micro sy bouton prêt   */}
-        <div className="flex flex-col gap-5 items-center  h-5/6  ">
-          <div className="p-10 flex bg-[#D5DAF3] dark:bg-white/5 rounded-full border-[#D5DAF3] dark:border-white border-4 m-36">
-           {darkMode? <FileDown size={100} stroke-width={1.5} color="white" /> : <FileDown size={100} color="#0A132D" stroke-width={1.5}/>} 
-          </div>
-
-        </div>
+        
 
       </div>
     </div>

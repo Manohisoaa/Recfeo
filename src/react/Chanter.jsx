@@ -18,7 +18,7 @@ export default function Chanter() {
   }
 
   const commonProps = {
-    className: darkMode ? "flex justify-center gap-40  items-center  h-14" : "flex justify-center items-center gap-40 h-14 w-4/6 bg-[#0A132D] rounded-md" 
+    color: darkMode? "white" : "#0A132D"
   };
 
   const startRecording = async () => {
@@ -71,10 +71,10 @@ export default function Chanter() {
 
             <div id="navbar-collapse" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block ">
               <div className="flex flex-col md:flex-row md:items-center md:justify-end py-2 md:py-0 md:ps-">
-                <Link className="py-3 ps-px sm:px-3 md:py-4 text-sm text-black hover:text-neutral-300 focus:outline-none focus:text-neutral-300 dark:text-white hover:text-black focus:outline-none focus:text-black" to="/chanter">Chanter</Link>
-                <Link className="py-3 ps-px sm:px-3 md:py-4 text-sm text-black hover:text-neutral-300 focus:outline-none focus:text-neutral-300 dark:text-white" to="/importer">Importer</Link>
-                <Link className="py-3 ps-px sm:px-3 md:py-4 text-sm text-black hover:text-neutral-300 focus:outline-none focus:text-neutral-300 dark:text-white" to="/enregistrement" aria-current="page" >Enregistrement</Link>
-                <Link className="py-3 ps-px sm:px-3 md:py-4 text-sm text-black  dark:text-white hover:text-neutral-300 focus:outline-none focus:text-neutral-300" to="/aide">Aide</Link>
+                {/* <Link className="py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white hover:text-black focus:outline-none focus:text-black dark:hover:text-black focus:outline-none focus:text-black" to="/chanter">Chanter</Link> */}
+                <Link className="py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-black focus:outline-none focus:text-black" to="/importer">Importer</Link>
+                <Link className="py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-black focus:outline-none focus:text-black" to="/enregistrement" aria-current="page" >Enregistrement</Link>
+                <Link className="py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D]  dark:text-white hover:text-white focus:outline-none focus:text-white dark:hover:text-black focus:outline-none focus:text-black" to="/aide">Aide</Link>
                 <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} color="white" /> : <Moon size={20} color="black" />}</button>
 
               </div>
@@ -83,11 +83,11 @@ export default function Chanter() {
         </header>
 
         {/* Micro sy bouton prêt   */}
-        <div className="flex flex-col gap-16 items-center  h-5/6  ">
+        <div className="flex flex-col gap-5 items-center  h-5/6  ">
           <div className="p-10 flex bg-[#D5DAF3] dark:bg-white/5 rounded-full border-[#D5DAF3] dark:border-white border-4 m-20">
-            <Mic size={100} color="#7A7C83" />
+           {darkMode? <Mic size={100} stroke-width={1.5} color="white" /> : <Mic size={100} color="#0A132D" stroke-width={1.5}/>} 
           </div>
-          {showPret && <button onClick={startRecording} className="dark:bg-transparent bg-[#D5DAF3] h-14 w-52  rounded-full border-4 border-[#D5DAF3] text-[#48494B] text-xl dark:border-white text-white ">Prêt</button>}
+          {showPret && <button onClick={startRecording} className="dark:bg-transparent bg-[#D5DAF3] h-14 w-52  rounded-full border-4 border-[#D5DAF3] dark:text-white text-xl dark:border-white text-[#0A132D] ">Prêt</button>}
 
           {/* <button className="bg-[#FFFF]" onClick={recording ? stopRecording : startRecording}>
                 {recording ? 'Stop Recording' : 'Start Recording'}
@@ -98,15 +98,15 @@ export default function Chanter() {
 
 
 
-          <div className="flex justify-center gap-50 m-4" {...commonProps} >
+          <div className="flex justify-center gap-40 m-4"  >
 
             {/* eo amin io onClick io rehefa hanisy action amin ilay izy */}
             {/* Ireto ny icône eo ambany */}
-            <Import size={40} color="white" onClick={() => { setPret(true); setAudioURL("") }} className="cursor-pointer" />
-            <RotateCcw size={40} color="white" className="cursor-pointer" onClick={startRecording} />
-            <Headphones size={40} color="white" className="cursor-pointer" />
-            <CircleStop size={40} color="white" onClick={stopRecording} className="cursor-pointer" />
-            <Trash2 size={40} color="white" className="cursor-pointer" onClick={() => { setPret(true); setAudioURL("") }} />
+            <Import size={40} {...commonProps} onClick={() => { setPret(true); setAudioURL("") }} className="cursor-pointer" />
+            <RotateCcw size={40} {...commonProps} className="cursor-pointer" onClick={startRecording} />
+            <Headphones size={40} {...commonProps} className="cursor-pointer" />
+            <CircleStop size={40} {...commonProps} onClick={stopRecording} className="cursor-pointer" />
+            <Trash2 size={40} {...commonProps} className="cursor-pointer" onClick={() => { setPret(true); setAudioURL("") }} />
           </div>
 
         </div>
