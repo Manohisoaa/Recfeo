@@ -20,16 +20,16 @@ function Accueil() {
       
       {/* // Logo sy Titre Recfeo */}
       <div className="flex flex-col items-center justify-center h-screen  ">
-        <img src={logo} className="object-cover h-40 my-4 " />
-        <h1 className="text-white text-2xl my-5">Rec Feo</h1>
+        <img src={logo} className="object-cover h-36 my-4 " />
+            <h1 className="text-white text-3xl my-5 font-bold font-lato">Rec'Feo</h1>
         {/* <Button>
           Importer
         </Button>
         */}
 
         {/* Bouton Importer sy Chanter */}
-        <button onClick={Importer} className="bg-transparent h-16 w-60 rounded-full border-2 border-white m-30 text-white text-xl my-6 ">Importer</button>
-        <button onClick={Chanter} className="bg-transparent h-16 w-60 rounded-full border-2 border-white m-30 text-white text-xl my-6 ">Chanter</button>
+        <button onClick={Importer} className=" font-lato font-bold bg-transparent h-16 w-60 rounded-full border-2 border-white m-30 text-white text-xl my-6 ">Importer</button>
+        <button onClick={Chanter} className="font-lato font-bold bg-transparent h-16 w-60 rounded-full border-2 border-white m-30 text-white text-xl my-6 ">Chanter</button>
       </div>
 
     </div>
