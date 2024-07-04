@@ -37,4 +37,13 @@ export default {
     import('preline/plugin'),
   ],
   darkMode: "class",
+  theme: {
+  extend: {
+    fontFamily: {
+      'raleway' : ['Raleway','sans-serif'],
+      'ga' : ['Ga Maamli', 'sans-serif'],
+      'lato' :  ['Lato', 'sans-serif'],
+    }
+  }
+}
 };
