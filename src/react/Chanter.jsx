@@ -74,7 +74,7 @@ export default function Chanter() {
               <div className="flex flex-col md:flex-row md:items-center md:justify-end py-2 md:py-0 md:ps-">
                 <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-black focus:outline-none focus:text-black" to="/importer">Importer</Link>
                 <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-black focus:outline-none focus:text-black" to="/enregistrement" aria-current="page" >Enregistrement</Link>
-                <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} color="white" /> : <Moon size={20} color="black" />}</button>
+                <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} stroke-width={2.5} color="white" /> : <Moon size={20} stroke-width={2.5} color="black" />}</button>
                 <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D]  dark:text-white hover:text-white focus:outline-none focus:text-white dark:hover:text-black focus:outline-none focus:text-black" to="/aide">Aide</Link>
 
               </div>

@@ -1,17 +1,44 @@
 import logo from "../assets/logo.png"
 import logodark from "../assets/logodark.png"
-import {Sun, Moon, FileDown } from "lucide-react"
+import {Sun, Moon, FileDown, Play, Pause} from "lucide-react"
 import ispm from "../assets/ispm.png"
 import { Link } from "react-router-dom"
 import { useState, useEffect, useRef } from "react"
 
 export default function Import() {
     const [darkMode, setDarkMode] = useState(false);
-    const toggleDarkMode = () => {
+    const audioRef = useRef(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [song, setSong] = useState(null);
+    const [audioSrc, setAudioSrc] = useState('');
+
+
+    const handleImport = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSong(file);
+      const audioURL = URL.createObjectURL(file);
+      setAudioSrc(audioURL);
+    }
+  };
+
+   //Music player
+    const togglePlayPause = () => {
+     if (isPlaying) {
+       audioRef.current.pause();
+     } else {
+       audioRef.current.play();
+     }
+     setIsPlaying(!isPlaying);
+    ;
+    }
+   
+  //dark mode et light mode
+  const toggleDarkMode = () => {
       setDarkMode(!darkMode);
     }
     const commonProps = {
-      color: darkMode? "white" : "#0A132D"
+      color: darkMode? "white" : "white"
     };
 
   return (
@@ -26,7 +53,7 @@ export default function Import() {
                   <a className="flex justify-between rounded-md text-xl items-center font-semibold focus:outline-none focus:opacity-80" href="../templates/agency/index.html" aria-label="Preline">
 
                     <img src={ispm} className="h-10 m-3 rounded-full" />
-                    {darkMode? <img src={logo} className="h-12 m-2 " /> : <img src={logodark} className="h-10 m-3 " />}
+                    {darkMode? <img src={logo}  className="h-12 m-2 " /> : <img src={logodark} className="h-10 m-3 " />}
                     <p className="text-[#0A132D] text-center dark:text-white font-bold">Rec'feo</p>
                   </a>
 
@@ -42,7 +69,7 @@ export default function Import() {
                   <div className="flex flex-col md:flex-row md:items-center md:justify-end py-2 md:py-0 md:ps-">
                   <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white hover:text-black focus:outline-none focus:text-black dark:hover:text-black focus:outline-none focus:text-black" to="/chanter">Chanter</Link>
                     <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-black focus:outline-none focus:text-black" to="/enregistrement" aria-current="page" >Enregistrement</Link>
-                    <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} color="white" /> : <Moon size={20} color="black" />}</button>
+                    <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} stroke-width={2.5} color="white" /> : <Moon size={20} stroke-width={2.5} color="black" />}</button>
                     <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D]  dark:text-white hover:text-white focus:outline-none focus:text-white dark:hover:text-black focus:outline-none focus:text-black" to="/aide">Aide</Link>
 
                   </div>
@@ -51,10 +78,34 @@ export default function Import() {
             </header>
             
             {/* Micro sy bouton prêt   */}
-            <div className="flex flex-col gap-5 items-center  h-5/6  ">
+            <input
+                type="file"
+                accept="audio/*"
+                id="importSong"
+                style={{ display: 'none' }}
+                onChange={handleImport}
+            />
+            <div className="flex justify-center items-center  h-5/6 gap-44 ">
                 <div className="p-10 flex bg-[#D5DAF3] dark:bg-white/5 rounded-full border-[#D5DAF3] dark:border-white border-4 m-36 cursor-pointer">
-                    {darkMode? <FileDown size={100} stroke-width={1.5} color="white" /> : <FileDown size={100} color="#0A132D" stroke-width={1.5}/>} 
+                    <button onClick={() => document.getElementById('importSong').click()}>
+                        {darkMode? <FileDown size={100} stroke-width={1.5} color="white" /> : <FileDown size={100} color="#0A132D" stroke-width={1.5}/>} 
+                    </button>
                 </div>
+                <div className="flex flex-col justify-center items-center gap-20  bg-[#0A132D] h-2/4 w-1/5 rounded-xl dark:border-white dark:border-4 ">
+                    { song? (
+                      <div>
+                        <p className="text-white dark:text-white mt-20"> {song.name}</p>
+                        <audio ref={audioRef}  >
+                          <source src={audioSrc} type={song.type} />
+                        </audio>
+                       
+                      </div>
+                      ) : (<p className="text-white dark:text-white mt-20"> ici le titre</p>)}
+                     <button onClick={togglePlayPause} className="p-4 bg-transparent dark:bg-white/5 rounded-full border-[#D5DAF3] dark:border-white border-4 m-10 cursor-pointer">
+                           {isPlaying ? <Pause size={30} {...commonProps} /> : <Play size={30} {...commonProps} />}
+                     </button>
+                 </div>
+
             </div>
       </div>
     </div>

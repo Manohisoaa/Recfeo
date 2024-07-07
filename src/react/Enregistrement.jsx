@@ -11,12 +11,18 @@ export default function Enregistrement() {
   const [volume, setVolume] = useState(0.5); // Initial volume (0 to 1)
   const audioRef = useRef(null);
   const [darkMode, setDarkMode] = useState(false);
+  
+   //dark Mode light mode
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   }
+ 
+  //dark Mode light mode
   const commonProps = {
     color: darkMode ? "white" : "#0A132D"
   };
+ 
+   //Music player
   const togglePlay = () => {
     if (isPlaying) {
       audioRef.current.pause();
@@ -25,6 +31,8 @@ export default function Enregistrement() {
     }
     setIsPlaying(!isPlaying);
   };
+  
+  
   return (
     // logo sy Menu
     <div className={`${darkMode && "dark"}`}>
@@ -53,7 +61,7 @@ export default function Enregistrement() {
               <div className="flex flex-col md:flex-row md:items-center md:justify-end py-2 md:py-0 md:ps-">
                <Link className="font-bold  font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white hover:text-black focus:outline-none focus:text-black dark:hover:text-black focus:outline-none focus:text-black" to="/chanter">Chanter</Link>
                 <Link className="font-bold  font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-black focus:outline-none focus:text-black" to="/importer">Importer</Link>
-                <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} color="white" /> : <Moon size={20} color="black" />}</button>
+                <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} stroke-width={2.5} color="white" /> : <Moon size={20} stroke-width={2.5} color="black" />}</button>
                 <Link className=" font-bold  font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D]  dark:text-white hover:text-white focus:outline-none focus:text-white dark:hover:text-black focus:outline-none focus:text-black" to="/aide">Aide</Link>
 
               </div>
@@ -68,10 +76,10 @@ export default function Enregistrement() {
                 <button onClick={togglePlay}>
                   {isPlaying ? <Pause size={24} {...commonProps} /> : <Play size={24} {...commonProps} />}
                 </button>
-            <h1 className="dark:text-white text-black">Until I Found you</h1>
+                  <h1 className="dark:text-white text-black">Until I Found you</h1>
                   <Volume2 size={30} {...commonProps} />
               </div>
-            </div>
+              </div>
                 <audio ref={audioRef} loop src="../audio/Salut.wav" />
               </div>
               
