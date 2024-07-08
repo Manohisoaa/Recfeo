@@ -47,7 +47,6 @@ export default function Chanter() {
     setRecording(false);
     mediaRecorder.current.stop();
   };
-  
 
   return (
     // logo sy Menu 
@@ -57,6 +56,7 @@ export default function Chanter() {
         <header className="sticky top-4 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full">
           <nav className="relative max-w-[66rem] w-full bg-[#D5DAF3] dark:bg-white/5 rounded-[28px] p-3 md:flex md:items-center md:justify-between md:py-0 mx-2 lg:mx-auto" aria-label="Global">
             <div className="flex items-center justify-between">
+
 
               <a className="flex justify-between rounded-md text-xl items-center font-semibold focus:outline-none focus:opacity-80" href="../templates/agency/index.html" aria-label="Preline">
                 <img src={ispm} className="h-14 ml-2 mt-2  rounded-full" />
@@ -103,17 +103,19 @@ export default function Chanter() {
           <div>
             {audioURL && <audio src={audioURL} controls />}
           </div>
+
           <div className="flex justify-center gap-40 m-4"  >
             {/* eo amin io onClick io rehefa hanisy action amin ilay izy */}
             {/* Ireto ny icône eo ambany */}
             <Import size={40} {...commonProps} onClick={() => { setPret(true); setAudioURL("") }} className="cursor-pointer" />
             <RotateCw size={40} {...commonProps} className="cursor-pointer " onClick={startRecording} />
-            <Headphones size={40} {...commonProps} className="cursor-pointer " />
+            <Headphones size={40} {...commonProps} className="cursor-pointer" />
             <CircleStop size={40} {...commonProps} onClick={stopRecording} className="cursor-pointer" />
-            <Trash2 size={40} {...commonProps} className="cursor-pointer"  onClick={() => { setPret(true); setAudioURL("") }} />
+            <Trash2 size={40} {...commonProps} className="cursor-pointer " onClick={() => { setPret(true); setAudioURL("") }} />
           </div>
         </div>
       </div>
     </div>
+
   )
 }

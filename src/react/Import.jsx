@@ -1,19 +1,19 @@
 import logo from "../assets/logo.png"
 import logodark from "../assets/logodark.png"
-import {Sun, Moon, FileDown, Play, Pause} from "lucide-react"
+import { Sun, Moon, FileDown, Play, Pause } from "lucide-react"
 import ispm from "../assets/ispm.png"
 import { Link } from "react-router-dom"
 import { useState, useEffect, useRef } from "react"
 
 export default function Import() {
-    const [darkMode, setDarkMode] = useState(false);
-    const audioRef = useRef(null);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [song, setSong] = useState(null);
-    const [audioSrc, setAudioSrc] = useState('');
+  const [darkMode, setDarkMode] = useState(false);
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [song, setSong] = useState(null);
+  const [audioSrc, setAudioSrc] = useState('');
 
 
-    const handleImport = (event) => {
+  const handleImport = (event) => {
     const file = event.target.files[0];
     if (file) {
       setSong(file);
@@ -22,35 +22,35 @@ export default function Import() {
     }
   };
 
-   //Music player
-    const togglePlayPause = () => {
-     if (isPlaying) {
-       audioRef.current.pause();
-     } else {
-       audioRef.current.play();
-     }
-     setIsPlaying(!isPlaying);
-    ;
+  //Music player
+  const togglePlayPause = () => {
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
     }
-   
+    setIsPlaying(!isPlaying);
+    ;
+  }
+
   //dark mode et light mode
   const toggleDarkMode = () => {
-      setDarkMode(!darkMode);
-    }
-    const commonProps = {
-      color: darkMode? "white" : "white"
-    };
+    setDarkMode(!darkMode);
+  }
+  const commonProps = {
+    color: darkMode ? "white" : "white"
+  };
 
   return (
     // logo sy Menu 
     <div className={`${darkMode && "dark"}`}>
       <div className=" h-screen fixed w-full bg-[#C7CFE9]  dark:bg-[#0A132D] dark: text-white">
 
-      <header className="sticky top-4 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full">
+        <header className="sticky top-4 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full">
           <nav className="relative max-w-[66rem] w-full bg-[#D5DAF3] dark:bg-white/5 rounded-[28px] p-3 md:flex md:items-center md:justify-between md:py-0 mx-2 lg:mx-auto" aria-label="Global">
-                <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between">
 
-                  <a className="flex justify-between rounded-md text-xl items-center font-semibold focus:outline-none focus:opacity-80" href="../templates/agency/index.html" aria-label="Preline">
+              <a className="flex justify-between rounded-md text-xl items-center font-semibold focus:outline-none focus:opacity-80" href="#" aria-label="Preline">
 
                     <img src={ispm} className="h-14 ml-2 mt-2 rounded-full" />
                     {darkMode? <img src={logo}  className="h-12 m-2 " /> : <img src={logodark} className="h-10 m-3 " />}
@@ -110,7 +110,10 @@ export default function Import() {
                            {isPlaying ? <Pause size={30} {...commonProps} /> : <Play size={30} {...commonProps} />}
                      </button>
                  </div>
+
             </div>
+
+
       </div>
     </div>
   )
