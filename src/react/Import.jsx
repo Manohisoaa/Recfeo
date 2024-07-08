@@ -112,39 +112,8 @@ export default function Import() {
                  </div>
 
             </div>
-          </nav>
-        </header>
 
-        {/* Micro sy bouton prêt   */}
-        <input
-          type="file"
-          accept="audio/*"
-          id="importSong"
-          style={{ display: 'none' }}
-          onChange={handleImport}
-        />
-        <div className="flex justify-center items-center  h-5/6 gap-44 ">
-          <div className="p-10 flex bg-[#D5DAF3] dark:bg-white/5 rounded-full border-[#D5DAF3] dark:border-white border-4 m-36 cursor-pointer">
-            <button onClick={() => document.getElementById('importSong').click()}>
-              {darkMode ? <FileDown size={100} stroke-width={1.5} color="white" /> : <FileDown size={100} color="#0A132D" stroke-width={1.5} />}
-            </button>
-          </div>
-          <div className="flex flex-col justify-center items-center gap-20  bg-[#0A132D] h-2/4 w-1/5 rounded-xl dark:border-white dark:border-4 ">
-            {song ? (
-              <div>
-                <p className="text-white dark:text-white mt-20"> {song.name}</p>
-                <audio ref={audioRef}  >
-                  <source src={audioSrc} type={song.type} />
-                </audio>
 
-              </div>
-            ) : (<p className="text-white dark:text-white mt-20"> ici le titre</p>)}
-            <button onClick={togglePlayPause} className="p-4 bg-transparent dark:bg-white/5 rounded-full border-[#D5DAF3] dark:border-white border-4 m-10 cursor-pointer">
-              {isPlaying ? <Pause size={30} {...commonProps} /> : <Play size={30} {...commonProps} />}
-            </button>
-          </div>
-
-        </div>
       </div>
     </div>
   )
