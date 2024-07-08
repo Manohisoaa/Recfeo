@@ -38,12 +38,14 @@ export default {
   ],
   darkMode: "class",
   theme: {
-  extend: {
-    fontFamily: {
-      'raleway' : ['Raleway','sans-serif'],
-      'ga' : ['Ga Maamli', 'sans-serif'],
-      'lato' :  ['Lato', 'sans-serif'],
+
+    extend: {
+      fontFamily: {
+        'raleway' : ['Raleway','sans-serif'],
+        'ga' : ['Ga Maamli', 'sans-serif'],
+        'lato' :  ['Lato', 'sans-serif'],
+      }
     }
   }
-}
-};
+  }
+

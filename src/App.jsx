@@ -3,8 +3,9 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Accueil from "./react/Accueil";
 import Chanter from "./react/Chanter";
 import Import from "./react/Import";
-import Enregistrement from "./react/Enregistrement"
-import Aide from "./react/Aide";
+
+import Enregistrement from "./react/Enregistrement";
+import Aide from "./react/Aide"
 
 import "preline";
 

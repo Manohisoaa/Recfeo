@@ -58,7 +58,7 @@ export default function Chanter() {
             <div className="flex items-center justify-between">
 
               <a className="flex justify-between rounded-md text-xl items-center font-semibold focus:outline-none focus:opacity-80" href="../templates/agency/index.html" aria-label="Preline">
-              <img src={ispm} className="h-10 m-2 rounded-full" />
+              <img src={ispm} className="h-14 ml-2 mt-2  rounded-full" />
                 {darkMode? <img src={logo} className="h-12 m-2 " /> : <img src={logodark} className="h-10 m-3 " />}
                 <p className="text-[#0A132D] text-center dark:text-white font-bold  ">Rec'feo</p>
               </a>
@@ -72,17 +72,17 @@ export default function Chanter() {
             </div>
             <div id="navbar-collapse" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block ">
               <div className="flex flex-col md:flex-row md:items-center md:justify-end py-2 md:py-0 md:ps-">
-                <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-black focus:outline-none focus:text-black group p-2 px-4" to="/importer">Importer
-                <div className="bg-white dark:bg-black h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
+
+                <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/importer">Importer
+                <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
                 </Link>
-                <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-black focus:outline-none focus:text-black group p-2 px-4" to="/enregistrement" aria-current="page" >Enregistrement
-                <div className="bg-white dark:bg-black h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
+                <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/enregistrement" aria-current="page" >Enregistrement
+                <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
                 </Link>
                 <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} color="white" /> : <Moon size={20} color="black" />}</button>
-                <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D]  dark:text-white hover:text-white focus:outline-none focus:text-white dark:hover:text-black focus:outline-none focus:text-black group p-2 px-4" to="/aide">Aide
-                <div className="bg-white dark:bg-black h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
+                <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D]  dark:text-white hover:text-white focus:outline-none focus:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/aide">Aide
+                <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
                 </Link>
-
               </div>
             </div>
           </nav>
@@ -103,7 +103,7 @@ export default function Chanter() {
                   {/* eo amin io onClick io rehefa hanisy action amin ilay izy */}
                   {/* Ireto ny icône eo ambany */}
                     <Import size={40} {...commonProps} onClick={() => { setPret(true); setAudioURL("") }} className="cursor-pointer" />
-                    <RotateCcw size={40} {...commonProps} className="cursor-pointer" onClick={startRecording} />
+                    <RotateCcw size={40} {...commonProps} className="cursor-pointer " onClick={startRecording} />
                     <Headphones size={40} {...commonProps} className="cursor-pointer" />
                     <CircleStop size={40} {...commonProps} onClick={stopRecording} className="cursor-pointer" />
                     <Trash2 size={40} {...commonProps} className="cursor-pointer" onClick={() => { setPret(true); setAudioURL("") }} />
