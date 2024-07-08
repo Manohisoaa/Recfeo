@@ -2,17 +2,23 @@ import logo from "../assets/logo.png"
 import logodark from "../assets/logodark.png"
 import { Sun, Play, Volume2, Pause, Moon } from "lucide-react"
 import ispm from "../assets/ispm.png"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 
 
 export default function Enregistrement() {
+  const {state} = useLocation()
+  const [listeAudio, setListeAudio] = useState([])
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.5); // Initial volume (0 to 1)
   const audioRef = useRef(null);
   const [darkMode, setDarkMode] = useState(false);
 
-  
+  useEffect(() => {
+    setListeAudio(state)
+    console.log(listeAudio)
+  },[])
    //dark Mode light mode
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -25,14 +31,14 @@ export default function Enregistrement() {
  
    //Music player
 
-  const togglePlay = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
-    }
-    setIsPlaying(!isPlaying);
-  };
+  // const togglePlay = () => {
+  //   if (isPlaying) {
+  //     audioRef.current.pause();
+  //   } else {
+  //     audioRef.current.play();
+  //   }
+  //   setIsPlaying(!isPlaying);
+  // };
 
   
   
@@ -68,11 +74,11 @@ export default function Enregistrement() {
                 <Link className="font-bold  font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white hover:text-black focus:outline-none focus:text-black dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/chanter">Chanter
                 <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
                 </Link>
-                <Link className="font-bold  font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/importer">Importer
+                <Link className="font-bold  font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/importer" state={listeAudio}>Importer
                 <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
                 </Link>
                 <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} color="white" /> : <Moon size={20} color="black" />}</button>
-                <Link className=" font-bold  font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D]  dark:text-white hover:text-white focus:outline-none focus:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/aide">Aide
+                <Link className=" font-bold  font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D]  dark:text-white hover:text-white focus:outline-none focus:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/aide" state={listeAudio}>Aide
                 <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
                 </Link>
 
@@ -83,16 +89,35 @@ export default function Enregistrement() {
 
 
         {/* Micro sy bouton prêt   */}
-        <div className="flex flex-col gap-16 items-center  h-5/6 m-10 ">
-          <div className="dark:bg-[#0A153B] bg-[#B7C0E7] h-20 w-full flex items-center justify-between p-10  ">
-            <button onClick={togglePlay}>
-              {isPlaying ? <Pause size={24} {...commonProps} /> : <Play size={24} {...commonProps} />}
-            </button>
-            <h1 className="dark:text-white text-black">Until I Found you</h1>
-            <Volume2 size={30} {...commonProps} />
+        {listeAudio.map((audio, index)=> {
+          const togglePlay = () => {
+            if (isPlaying) {
+              audioRef.current.pause();
+            } else {
+              audioRef.current.play();
+            }
+            setIsPlaying(!isPlaying);
+          };
+          return (
+            <div key={index}>
+            <div className="flex flex-col gap-16 items-center  h-5/6 m-10 ">
+            <div className="dark:bg-[#0A153B] bg-[#B7C0E7] h-20 w-full flex items-center justify-between p-10  ">
+              <button onClick={togglePlay}>
+                {isPlaying ? <Pause size={24} {...commonProps} /> : <Play size={24} {...commonProps} />}
+              </button>
+              <h1 className="dark:text-white text-black">{audio.titre}</h1>
+              <Volume2 size={30} {...commonProps} />
+            </div>
+            <audio ref={audioRef}  >
+              <source src={audio.audio}/>
+            </audio>
           </div>
-        </div>
-        <audio ref={audioRef} loop src="../audio/Salut.wav" />
+          </div>
+          )
+        }) }
+       
+
+        
       </div>
 
     </div >

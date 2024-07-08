@@ -7,6 +7,8 @@ import { useState, useEffect, useRef } from "react"
 
 
 export default function Chanter() {
+  const [listeAudio, setListeAudio] = useState([]);
+  const [titre, setTitre] = useState("");
   const [showPret, setPret] = useState(true);
   const [recording, setRecording] = useState(false);
   const [audioURL, setAudioURL] = useState('');
@@ -48,6 +50,19 @@ export default function Chanter() {
     mediaRecorder.current.stop();
   };
 
+  const enregistrer = () => {
+    setListeAudio(prevListeAudio => [...prevListeAudio, {
+      titre : titre,
+      audio : audioURL
+    }])
+    setPret(true); 
+    setAudioURL("");
+    setTitre("") ;
+    console.log("listeAudio ", listeAudio)
+ }
+
+  
+
   return (
     // logo sy Menu 
     <div className={`${darkMode && "dark"}`}>
@@ -78,7 +93,7 @@ export default function Chanter() {
                 <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/importer">Importer
                 <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
                 </Link>
-                <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/enregistrement" aria-current="page" >Enregistrement
+                <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/enregistrement" aria-current="page" state={listeAudio} >Enregistrement
                 <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
                 </Link>
                 <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} color="white" /> : <Moon size={20} color="black" />}</button>
@@ -99,13 +114,15 @@ export default function Chanter() {
 
 
           <div>
-            {audioURL && <audio src={audioURL} controls />}
+            {audioURL &&
+            <><input placeholder="titre" type="text" className="block w-full rounded-xl text-[#0A132D] appearance-none bg-white py-4 pl-4 pr-12 text-base text-slate-900 placeholder:text-slate-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setTitre(e.target.value)}/><audio src={audioURL}  /></>
+            }
           </div>
 
             <div className="flex justify-center gap-40 m-4"  >
                   {/* eo amin io onClick io rehefa hanisy action amin ilay izy */}
                   {/* Ireto ny icône eo ambany */}
-                    <Import size={40} {...commonProps} onClick={() => { setPret(true); setAudioURL("") }} className="cursor-pointer" />
+                    <Import size={40} {...commonProps} onClick={ enregistrer } className="cursor-pointer" />
                     <RotateCcw size={40} {...commonProps} className="cursor-pointer " onClick={startRecording} />
                     <Headphones size={40} {...commonProps} className="cursor-pointer" />
                     <CircleStop size={40} {...commonProps} onClick={stopRecording} className="cursor-pointer" />
@@ -115,6 +132,6 @@ export default function Chanter() {
           </div>
         </div>
       </div>
-    </div>
+  
   )
 }
