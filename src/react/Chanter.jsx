@@ -1,6 +1,6 @@
 import logo from "../assets/logo.png"
 import logodark from "../assets/logodark.png"
-import { CircleStop, Headphones, Import, Menu, Mic, RotateCcw, Trash2, FileUp, Sun, Moon } from "lucide-react"
+import { CircleStop, Headphones, Import, Menu, Mic, RotateCw, Trash2, FileUp, Sun, Moon } from "lucide-react"
 import ispm from "../assets/ispm.png"
 import { Link } from "react-router-dom"
 import { useState, useEffect, useRef } from "react"
@@ -74,9 +74,8 @@ export default function Chanter() {
 
 
               <a className="flex justify-between rounded-md text-xl items-center font-semibold focus:outline-none focus:opacity-80" href="../templates/agency/index.html" aria-label="Preline">
-              <img src={ispm} className="h-14 ml-2 mt-2  rounded-full" />
-                {darkMode? <img src={logo} className="h-12 m-2 " /> : <img src={logodark} className="h-10 m-3 " />}
-
+                <img src={ispm} className="h-14 ml-2 mt-2  rounded-full" />
+                {darkMode ? <img src={logo} className="h-12 m-2 " /> : <img src={logodark} className="h-10 m-3 " />}
                 <p className="text-[#0A132D] text-center dark:text-white font-bold  ">Rec'feo</p>
               </a>
 
@@ -91,14 +90,15 @@ export default function Chanter() {
               <div className="flex flex-col md:flex-row md:items-center md:justify-end py-2 md:py-0 md:ps-">
 
                 <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/importer">Importer
-                <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
+                  <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
                 </Link>
                 <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/enregistrement" aria-current="page" state={listeAudio} >Enregistrement
                 <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
+
                 </Link>
                 <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} color="white" /> : <Moon size={20} color="black" />}</button>
                 <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D]  dark:text-white hover:text-white focus:outline-none focus:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/aide">Aide
-                <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
+                  <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
                 </Link>
               </div>
             </div>
@@ -110,7 +110,10 @@ export default function Chanter() {
           <div className="p-10 flex bg-[#D5DAF3] dark:bg-white/5 rounded-full border-[#D5DAF3] dark:border-white border-4 m-20">
             {darkMode ? <Mic size={100} stroke-width={1.5} color="white" /> : <Mic size={100} color="#0A132D" stroke-width={1.5} />}
           </div>
-          {showPret && <button onClick={startRecording} className=" font-lato dark:bg-transparent bg-[#D5DAF3] h-14 w-52  rounded-full border-4 border-[#D5DAF3] dark:text-white text-xl dark:border-white text-[#0A132D] ">Prêt</button>}
+          {showPret && <button onClick={startRecording} className=" font-medium dark:bg-transparent bg-[#D5DAF3] h-16 w-48  rounded-full border-4 border-[#D5DAF3] dark:text-white text-xl dark:border-white text-[#0A132D] animate-bounce focus:animate-none hover:animate-none">
+            {/* <span class="ml-2">Prêt</span> */}
+            Prêt
+          </button>}
 
 
           <div>
@@ -119,11 +122,12 @@ export default function Chanter() {
             }
           </div>
 
+
             <div className="flex justify-center gap-40 m-4"  >
                   {/* eo amin io onClick io rehefa hanisy action amin ilay izy */}
                   {/* Ireto ny icône eo ambany */}
                     <Import size={40} {...commonProps} onClick={ enregistrer } className="cursor-pointer" />
-                    <RotateCcw size={40} {...commonProps} className="cursor-pointer " onClick={startRecording} />
+                    <RotateCw size={40} {...commonProps} className="cursor-pointer " onClick={startRecording} />
                     <Headphones size={40} {...commonProps} className="cursor-pointer" />
                     <CircleStop size={40} {...commonProps} onClick={stopRecording} className="cursor-pointer" />
                     <Trash2 size={40} {...commonProps} className="cursor-pointer" onClick={() => { setPret(true); setAudioURL("") }} />
@@ -133,5 +137,6 @@ export default function Chanter() {
         </div>
       </div>
   
+
   )
 }
