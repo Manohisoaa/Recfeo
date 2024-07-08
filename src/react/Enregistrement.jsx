@@ -11,6 +11,7 @@ export default function Enregistrement() {
   const [volume, setVolume] = useState(0.5); // Initial volume (0 to 1)
   const audioRef = useRef(null);
   const [darkMode, setDarkMode] = useState(false);
+
   
    //dark Mode light mode
   const toggleDarkMode = () => {
@@ -23,6 +24,7 @@ export default function Enregistrement() {
   };
  
    //Music player
+
   const togglePlay = () => {
     if (isPlaying) {
       audioRef.current.pause();
@@ -31,6 +33,7 @@ export default function Enregistrement() {
     }
     setIsPlaying(!isPlaying);
   };
+
   
   
   return (
@@ -39,13 +42,15 @@ export default function Enregistrement() {
       <div className=" h-screen fixed w-full bg-[#C7CFE9]  dark:bg-[#0A132D] dark: text-white">
 
         <header className="sticky top-4 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full">
-        <nav className="relative max-w-[66rem] w-full bg-[#D5DAF3] dark:bg-white/5 rounded-[28px] p-3 md:flex md:items-center md:justify-between md:py-0 mx-2 lg:mx-auto" aria-label="Global">
+          <nav className="relative max-w-[66rem] w-full bg-[#D5DAF3] dark:bg-white/5 rounded-[28px] p-3 md:flex md:items-center md:justify-between md:py-0 mx-2 lg:mx-auto" aria-label="Global">
+
             <div className="flex items-center justify-between">
 
               <a className="flex justify-between rounded-md text-xl items-center font-semibold focus:outline-none focus:opacity-80" href="../templates/agency/index.html" aria-label="Preline">
 
-                <img src={ispm} className="h-10 m-3 rounded-full" />
-                {darkMode? <img src={logo} className="h-12 m-2 " /> : <img src={logodark} className="h-10 m-3 " />}
+                <img src={ispm} className="h-14 ml-2 mt-2 rounded-full" />
+                {darkMode ? <img src={logo} className="h-12 m-2 " /> : <img src={logodark} className="h-10 m-3 " />}
+
                 <p className="text-black text-center text-black dark:text-white font-bold  ">Rec'feo</p>
               </a>
 
@@ -59,31 +64,38 @@ export default function Enregistrement() {
 
             <div id="navbar-collapse" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block ">
               <div className="flex flex-col md:flex-row md:items-center md:justify-end py-2 md:py-0 md:ps-">
-               <Link className="font-bold  font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white hover:text-black focus:outline-none focus:text-black dark:hover:text-black focus:outline-none focus:text-black" to="/chanter">Chanter</Link>
-                <Link className="font-bold  font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-black focus:outline-none focus:text-black" to="/importer">Importer</Link>
-                <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} stroke-width={2.5} color="white" /> : <Moon size={20} stroke-width={2.5} color="black" />}</button>
-                <Link className=" font-bold  font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D]  dark:text-white hover:text-white focus:outline-none focus:text-white dark:hover:text-black focus:outline-none focus:text-black" to="/aide">Aide</Link>
+
+                <Link className="font-bold  font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white hover:text-black focus:outline-none focus:text-black dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/chanter">Chanter
+                <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
+                </Link>
+                <Link className="font-bold  font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/importer">Importer
+                <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
+                </Link>
+                <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} color="white" /> : <Moon size={20} color="black" />}</button>
+                <Link className=" font-bold  font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D]  dark:text-white hover:text-white focus:outline-none focus:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/aide">Aide
+                <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
+                </Link>
 
               </div>
             </div>
-            </nav>
-            </header>
-            
-            
-            {/* Micro sy bouton prêt   */}
-            <div className="flex flex-col gap-16 items-center  h-5/6 m-10 ">
-              <div className="dark:bg-[#0A153B] bg-[#B7C0E7] h-20 w-full flex items-center justify-between p-10  ">
-                <button onClick={togglePlay}>
-                  {isPlaying ? <Pause size={24} {...commonProps} /> : <Play size={24} {...commonProps} />}
-                </button>
-                  <h1 className="dark:text-white text-black">Until I Found you</h1>
-                  <Volume2 size={30} {...commonProps} />
-              </div>
-              </div>
-                <audio ref={audioRef} loop src="../audio/Salut.wav" />
-              </div>
-              
-            </div >
-       )
-   }
-            
+          </nav>
+        </header>
+
+
+        {/* Micro sy bouton prêt   */}
+        <div className="flex flex-col gap-16 items-center  h-5/6 m-10 ">
+          <div className="dark:bg-[#0A153B] bg-[#B7C0E7] h-20 w-full flex items-center justify-between p-10  ">
+            <button onClick={togglePlay}>
+              {isPlaying ? <Pause size={24} {...commonProps} /> : <Play size={24} {...commonProps} />}
+            </button>
+            <h1 className="dark:text-white text-black">Until I Found you</h1>
+            <Volume2 size={30} {...commonProps} />
+          </div>
+        </div>
+        <audio ref={audioRef} loop src="../audio/Salut.wav" />
+      </div>
+
+    </div >
+  )
+}
+
