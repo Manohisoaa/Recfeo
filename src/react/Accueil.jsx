@@ -30,8 +30,8 @@ function Accueil() {
       {
         // video animation logo
         loading ?
-          <div className="bg-[#0A132D] h-20 fixed w-full ">
-            <video width="1000" className="w-full " autoPlay loop muted playsInline>
+          <div className="bg-[#0A132D] h-screen fixed w-full ">
+            <video width="" className="w-full h-5/6 mt-10" autoPlay loop muted playsInline>
               <source src={logovideo} type="video/mp4" />
             </video>
           </div>
