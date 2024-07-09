@@ -52,16 +52,16 @@ export default function Chanter() {
 
   const enregistrer = () => {
     setListeAudio(prevListeAudio => [...prevListeAudio, {
-      titre : titre,
-      audio : audioURL
+      titre: titre,
+      audio: audioURL
     }])
-    setPret(true); 
+    setPret(true);
     setAudioURL("");
-    setTitre("") ;
+    setTitre("");
     console.log("listeAudio ", listeAudio)
- }
+  }
 
-  
+
 
   return (
     // logo sy Menu 
@@ -73,7 +73,7 @@ export default function Chanter() {
             <div className="flex items-center justify-between">
 
 
-              <a className="flex justify-between rounded-md text-xl items-center font-semibold focus:outline-none focus:opacity-80" href="../templates/agency/index.html" aria-label="Preline">
+              <a className="flex justify-between rounded-md text-xl items-center font-semibold focus:outline-none focus:opacity-80" href="#" aria-label="Preline">
                 <img src={ispm} className="h-14 ml-2 mt-2  rounded-full" />
                 {darkMode ? <img src={logo} className="h-12 m-2 " /> : <img src={logodark} className="h-10 m-3 " />}
                 <p className="text-[#0A132D] text-center dark:text-white font-bold  ">Rec'feo</p>
@@ -93,7 +93,7 @@ export default function Chanter() {
                   <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
                 </Link>
                 <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/enregistrement" aria-current="page" state={listeAudio} >Enregistrement
-                <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
+                  <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
 
                 </Link>
                 <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} color="white" /> : <Moon size={20} color="black" />}</button>
@@ -118,25 +118,25 @@ export default function Chanter() {
 
           <div>
             {audioURL &&
-            <><input placeholder="titre" type="text" className="block w-full rounded-xl text-[#0A132D] appearance-none bg-white py-4 pl-4 pr-12 text-base text-slate-900 placeholder:text-slate-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setTitre(e.target.value)}/><audio src={audioURL}  /></>
+              <><input placeholder="titre" type="text" className="block w-full rounded-xl text-[#0A132D] appearance-none bg-white py-4 pl-4 pr-12 text-base text-slate-900 placeholder:text-slate-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setTitre(e.target.value)} /><audio src={audioURL} /></>
             }
           </div>
 
 
-            <div className="flex justify-center gap-40 m-4"  >
-                  {/* eo amin io onClick io rehefa hanisy action amin ilay izy */}
-                  {/* Ireto ny icône eo ambany */}
-                    <Import size={40} {...commonProps} onClick={ enregistrer } className="cursor-pointer" />
-                    <RotateCw size={40} {...commonProps} className="cursor-pointer " onClick={startRecording} />
-                    <Headphones size={40} {...commonProps} className="cursor-pointer" />
-                    <CircleStop size={40} {...commonProps} onClick={stopRecording} className="cursor-pointer" />
-                    <Trash2 size={40} {...commonProps} className="cursor-pointer" onClick={() => { setPret(true); setAudioURL("") }} />
-              </div>
-
+          <div className="flex justify-center gap-40 m-4"  >
+            {/* eo amin io onClick io rehefa hanisy action amin ilay izy */}
+            {/* Ireto ny icône eo ambany */}
+            <Import size={40} {...commonProps} onClick={enregistrer} className="cursor-pointer" />
+            <RotateCw size={40} {...commonProps} className="cursor-pointer " onClick={startRecording} />
+            <Headphones size={40} {...commonProps} className="cursor-pointer" />
+            <CircleStop size={40} {...commonProps} onClick={stopRecording} className="cursor-pointer" />
+            <Trash2 size={40} {...commonProps} className="cursor-pointer" onClick={() => { setPret(true); setAudioURL("") }} />
           </div>
+
         </div>
       </div>
-  
+    </div>
+
 
   )
 }
