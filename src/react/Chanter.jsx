@@ -118,7 +118,7 @@ export default function Chanter() {
 
           <div>
             {audioURL &&
-            <><input placeholder="titre" type="text" className="block w-full rounded-xl text-[#0A132D] appearance-none bg-white py-4 pl-4 pr-12 text-base text-slate-900 placeholder:text-slate-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setTitre(e.target.value)}/><audio src={audioURL}  /></>
+            <><input placeholder="titre" type="text" className="font-bold block w-full rounded-xl text-[#0A132D] appearance-none bg-white py-4 pl-4 pr-12 text-base text-slate-900 placeholder:text-slate-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setTitre(e.target.value)}/><audio src={audioURL}  /></>
             }
           </div>
 
