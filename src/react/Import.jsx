@@ -107,8 +107,8 @@ export default function Import() {
                         </audio>
                        
                       </div>
-                      ) : (<p className="text-white dark:text-white mt-20"> ici le titre</p>)}
-                     <button onClick={togglePlayPause} className="p-4 bg-transparent dark:bg-white/5 rounded-full border-[#D5DAF3] dark:border-white border-4 m-10 cursor-pointer">
+                      ) : (<p className="text-white dark:text-white mt-15"> ici le titre</p>)}
+                     <button onClick={togglePlayPause} className="p-4 bg-transparent dark:bg-white/5 rounded-full border-[#D5DAF3] dark:border-white border-4 cursor-pointer">
                            {isPlaying ? <Pause size={30} {...commonProps} /> : <Play size={30} {...commonProps} />}
                      </button>
                  </div>

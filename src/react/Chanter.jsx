@@ -5,7 +5,6 @@ import ispm from "../assets/ispm.png"
 import { Link } from "react-router-dom"
 import { useState, useEffect, useRef } from "react"
 
-
 export default function Chanter() {
   const [listeAudio, setListeAudio] = useState([]);
   const [titre, setTitre] = useState("");
@@ -15,8 +14,60 @@ export default function Chanter() {
   const mediaRecorder = useRef(null);
   const audioChunks = useRef([]);
   const [darkMode, setDarkMode] = useState(false);
+  const [time, setTime] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  const [isPaused, setIsPaused] = useState(true);
+  const [isStartAgain, setStartAgain] = useState(false);
 
 
+  // le mandefa chronomètre
+
+  useEffect(() => {
+    let interval = null;
+    if (isActive && !isPaused) {
+      interval = setInterval(() => {
+        setTime(prevTime => prevTime + 1);
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, isPaused]);
+
+  const handleStart = () => {
+    setIsActive(true);
+    setIsPaused(false);
+  };
+
+  const handlePause = () => {
+    setIsPaused(!isPaused);
+    setStartAgain(false);
+  };
+
+  const handleReset = () => {
+    setIsActive(true);
+    setTime(0);
+    setStartAgain(true);
+
+  };
+
+  const stopReset = () => {
+    setIsActive(false);
+    setTime(0);
+  
+  };
+
+  const formatTime = () => {
+    const getSeconds = `0${(time % 60)}`.slice(-2);
+    const minutes = `${Math.floor(time / 60)}`;
+    const getMinutes = `0${minutes % 60}`.slice(-2);
+    const getHours = `0${Math.floor(time / 3600)}`.slice(-2);
+
+    return `${getHours} : ${getMinutes} : ${getSeconds}`;
+  };
+  //atreto
+
+  //manao dark mode sy light mode
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   }
@@ -50,18 +101,19 @@ export default function Chanter() {
     mediaRecorder.current.stop();
   };
 
+
   const enregistrer = () => {
     setListeAudio(prevListeAudio => [...prevListeAudio, {
-      titre : titre,
-      audio : audioURL
+      titre: titre,
+      audio: audioURL
     }])
-    setPret(true); 
+    setPret(true);
     setAudioURL("");
-    setTitre("") ;
+    setTitre("");
     console.log("listeAudio ", listeAudio)
- }
+  }
 
-  
+
 
   return (
     // logo sy Menu 
@@ -73,7 +125,7 @@ export default function Chanter() {
             <div className="flex items-center justify-between">
 
 
-              <a className="flex justify-between rounded-md text-xl items-center font-semibold focus:outline-none focus:opacity-80" href="../templates/agency/index.html" aria-label="Preline">
+              <a className="flex justify-between rounded-md text-xl items-center font-semibold focus:outline-none focus:opacity-80" href="#" aria-label="Preline">
                 <img src={ispm} className="h-14 ml-2 mt-2  rounded-full" />
                 {darkMode ? <img src={logo} className="h-12 m-2 " /> : <img src={logodark} className="h-10 m-3 " />}
                 <p className="text-[#0A132D] text-center dark:text-white font-bold  ">Rec'feo</p>
@@ -93,7 +145,7 @@ export default function Chanter() {
                   <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
                 </Link>
                 <Link className="font-bold font-raleway py-3 ps-px sm:px-3 md:py-4 text-sm text-[#0A132D] hover:text-white focus:outline-none focus:text-white dark:text-white dark:hover:text-[#C7CFE9] focus:outline-none focus:text-black group p-2 px-4" to="/enregistrement" aria-current="page" state={listeAudio} >Enregistrement
-                <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
+                  <div className="bg-white dark:bg-[#C7CFE9] h-[2px] w-0 group-hover:w-full transition-all duration-500"></div>
 
                 </Link>
                 <button onClick={toggleDarkMode}>{darkMode ? <Sun size={20} color="white" /> : <Moon size={20} color="black" />}</button>
@@ -110,33 +162,44 @@ export default function Chanter() {
           <div className="p-10 flex bg-[#D5DAF3] dark:bg-white/5 rounded-full border-[#D5DAF3] dark:border-white border-4 m-20">
             {darkMode ? <Mic size={100} stroke-width={1.5} color="white" /> : <Mic size={100} color="#0A132D" stroke-width={1.5} />}
           </div>
-          {showPret && <button onClick={startRecording} className=" font-medium dark:bg-transparent bg-[#D5DAF3] h-16 w-48  rounded-full border-4 border-[#D5DAF3] dark:text-white text-xl dark:border-white text-[#0A132D] animate-bounce focus:animate-none hover:animate-none">
-            {/* <span class="ml-2">Prêt</span> */}
-            Prêt
-          </button>}
+
+          <div className="text-3xl font-mono text-gray-700 mb-4">{formatTime()}</div>
+          
+            {showPret && <button onClick={() => { startRecording(); handleStart() }} className=" font-medium dark:bg-transparent bg-[#D5DAF3] h-16 w-48  rounded-full border-4 border-[#D5DAF3] dark:text-white text-xl dark:border-white text-[#0A132D] animate-bounce focus:animate-none hover:animate-none">
+              {/* <span class="ml-2">Prêt</span> */}
+               Prêt
+            </button>}
+
+            {isStartAgain && <h1 className=" text-[#0A132D]">Vous avez recommencé</h1>}
+              
 
 
           <div>
             {audioURL &&
-            <><input placeholder="titre" type="text" className="font-bold block w-full rounded-xl text-[#0A132D] appearance-none bg-white py-4 pl-4 pr-12 text-base text-slate-900 placeholder:text-slate-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setTitre(e.target.value)}/><audio src={audioURL}  /></>
+
+              <>
+                  <input placeholder="titre" type="text" className="block w-full rounded-xl text-[#0A132D] appearance-none bg-white py-4 pl-4 pr-12 text-base text-slate-900 placeholder:text-slate-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setTitre(e.target.value)} />
+                  <audio src={audioURL} />
+              </>
+
             }
           </div>
 
 
-            <div className="flex justify-center gap-40 m-4"  >
-                  {/* eo amin io onClick io rehefa hanisy action amin ilay izy */}
-                  {/* Ireto ny icône eo ambany */}
-                    <Import size={40} {...commonProps} onClick={ enregistrer } className="cursor-pointer" />
-                    <RotateCw size={40} {...commonProps} className="cursor-pointer " onClick={startRecording} />
-                    <Headphones size={40} {...commonProps} className="cursor-pointer" />
-                    <CircleStop size={40} {...commonProps} onClick={stopRecording} className="cursor-pointer" />
-                    <Trash2 size={40} {...commonProps} className="cursor-pointer" onClick={() => { setPret(true); setAudioURL("") }} />
-              </div>
-
+          <div className="flex justify-center gap-40 m-4"  >
+            {/* eo amin io onClick io rehefa hanisy action amin ilay izy */}
+            {/* Ireto ny icône eo ambany */}
+            <Import size={40} {...commonProps} onClick={enregistrer} className="cursor-pointer" />
+            <RotateCw size={40} {...commonProps} className="cursor-pointer " onClick={() => { startRecording(); handleReset() }}  disabled={!isActive}/>
+            <Headphones size={40} {...commonProps} className="cursor-pointer" />
+            <CircleStop size={40} {...commonProps} onClick={() => { stopRecording(); handlePause() }} className="cursor-pointer" />
+            <Trash2 size={40} {...commonProps} className="cursor-pointer" onClick={() => { setPret(true); setAudioURL("") ; stopReset() }} />
           </div>
+
         </div>
       </div>
-  
+    </div>
+
 
   )
 }
