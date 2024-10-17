@@ -47,12 +47,11 @@ const Chronometer = () => {
                 <div className="text-3xl font-mono text-gray-700 mb-4">{formatTime()}</div>
                 <div className="flex space-x-4">
                     {!isActive && !isPaused ? (
-                        <button
-                            onClick={handleStart}
-                            className="px-4 py-2 bg-green-500 text-white rounded"
-                        >
-                            Démarrer
-                        </button>
+                        <Chanter
+                            onButtonClick={handleStart}
+                        />
+
+
                     ) : (
                         <button
                             onClick={handlePause}

@@ -5,8 +5,7 @@ import ispm from "../assets/ispm.png"
 import { Link } from "react-router-dom"
 import { useState, useEffect, useRef } from "react"
 
-
-export default function Chanter() {
+export default function Chanter({ onButtonClick }) {
   const [listeAudio, setListeAudio] = useState([]);
   const [titre, setTitre] = useState("");
   const [showPret, setPret] = useState(true);
@@ -15,8 +14,50 @@ export default function Chanter() {
   const mediaRecorder = useRef(null);
   const audioChunks = useRef([]);
   const [darkMode, setDarkMode] = useState(false);
+  const [time, setTime] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  const [isPaused, setIsPaused] = useState(true);
 
+  // le mandefa chronomètre
 
+  useEffect(() => {
+    let interval = null;
+    if (isActive && !isPaused) {
+      interval = setInterval(() => {
+        setTime(prevTime => prevTime + 1);
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, isPaused]);
+
+  const handleStart = () => {
+    setIsActive(true);
+    setIsPaused(false);
+  };
+
+  const handlePause = () => {
+    setIsPaused(!isPaused);
+  };
+
+  const handleReset = () => {
+    setIsActive(false);
+    setTime(0);
+
+  };
+
+  const formatTime = () => {
+    const getSeconds = `0${(time % 60)}`.slice(-2);
+    const minutes = `${Math.floor(time / 60)}`;
+    const getMinutes = `0${minutes % 60}`.slice(-2);
+    const getHours = `0${Math.floor(time / 3600)}`.slice(-2);
+
+    return `${getHours} : ${getMinutes} : ${getSeconds}`;
+  };
+  //atreto
+
+  //manao dark mode sy light mode
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   }
@@ -110,11 +151,13 @@ export default function Chanter() {
           <div className="p-10 flex bg-[#D5DAF3] dark:bg-white/5 rounded-full border-[#D5DAF3] dark:border-white border-4 m-20">
             {darkMode ? <Mic size={100} stroke-width={1.5} color="white" /> : <Mic size={100} color="#0A132D" stroke-width={1.5} />}
           </div>
-          {showPret && <button onClick={startRecording} className=" font-medium dark:bg-transparent bg-[#D5DAF3] h-16 w-48  rounded-full border-4 border-[#D5DAF3] dark:text-white text-xl dark:border-white text-[#0A132D] animate-bounce focus:animate-none hover:animate-none">
+
+          <div className="text-3xl font-mono text-gray-700 mb-4">{formatTime()}</div>
+
+          {showPret && <button onClick={() => { startRecording(); handleStart() }} className=" font-medium dark:bg-transparent bg-[#D5DAF3] h-16 w-48  rounded-full border-4 border-[#D5DAF3] dark:text-white text-xl dark:border-white text-[#0A132D] animate-bounce focus:animate-none hover:animate-none">
             {/* <span class="ml-2">Prêt</span> */}
             Prêt
           </button>}
-
 
           <div>
             {audioURL &&
@@ -127,9 +170,9 @@ export default function Chanter() {
             {/* eo amin io onClick io rehefa hanisy action amin ilay izy */}
             {/* Ireto ny icône eo ambany */}
             <Import size={40} {...commonProps} onClick={enregistrer} className="cursor-pointer" />
-            <RotateCw size={40} {...commonProps} className="cursor-pointer " onClick={startRecording} />
+            <RotateCw size={40} {...commonProps} className="cursor-pointer " onClick={() => { startRecording(); handleReset() }} />
             <Headphones size={40} {...commonProps} className="cursor-pointer" />
-            <CircleStop size={40} {...commonProps} onClick={stopRecording} className="cursor-pointer" />
+            <CircleStop size={40} {...commonProps} onClick={() => { stopRecording(); handlePause() }} className="cursor-pointer" />
             <Trash2 size={40} {...commonProps} className="cursor-pointer" onClick={() => { setPret(true); setAudioURL("") }} />
           </div>
 
