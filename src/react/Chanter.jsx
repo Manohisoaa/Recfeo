@@ -4,6 +4,7 @@ import { CircleStop, Headphones, Import, Menu, Mic, RotateCw, Trash2, FileUp, Su
 import ispm from "../assets/ispm.png"
 import { Link } from "react-router-dom"
 import { useState, useEffect, useRef } from "react"
+import axios from "axios"
 
 export default function Chanter() {
   const [listeAudio, setListeAudio] = useState([]);
@@ -76,6 +77,8 @@ export default function Chanter() {
     color: darkMode ? "white" : "#0A132D"
   };
 
+  //recording
+
   const startRecording = async () => {
     setPret(false);
     setAudioURL("")
@@ -91,6 +94,7 @@ export default function Chanter() {
       const url = URL.createObjectURL(audioBlob);
       setAudioURL(url);
       audioChunks.current = [];
+      uploadAudio(audioBlob);
     };
 
     mediaRecorder.current.start();
@@ -100,6 +104,25 @@ export default function Chanter() {
     setRecording(false);
     mediaRecorder.current.stop();
   };
+
+  
+    // enregistrement sur base de données
+  const uploadAudio = async (audioBlob) => {
+    const formData = new FormData();
+    formData.append('audio', audioBlob, 'recording.wav');
+
+    try {
+      const response = await axios.post('http://localhost:5000/upload-audio', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log('Audio uploaded successfully:', response.data);
+    } catch (error) {
+      console.error('Error uploading audio:', error);
+    }
+  };
+
 
 
   const enregistrer = () => {
