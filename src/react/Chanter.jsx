@@ -4,8 +4,9 @@ import { CircleStop, Headphones, Import, Menu, Mic, RotateCw, Trash2, FileUp, Su
 import ispm from "../assets/ispm.png"
 import { Link } from "react-router-dom"
 import { useState, useEffect, useRef } from "react"
+import axios from "axios"
 
-export default function Chanter({ onButtonClick }) {
+export default function Chanter() {
   const [listeAudio, setListeAudio] = useState([]);
   const [titre, setTitre] = useState("");
   const [showPret, setPret] = useState(true);
@@ -17,6 +18,8 @@ export default function Chanter({ onButtonClick }) {
   const [time, setTime] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
+  const [isStartAgain, setStartAgain] = useState(false);
+
 
   // le mandefa chronomètre
 
@@ -39,12 +42,20 @@ export default function Chanter({ onButtonClick }) {
 
   const handlePause = () => {
     setIsPaused(!isPaused);
+    setStartAgain(false);
   };
 
   const handleReset = () => {
+    setIsActive(true);
+    setTime(0);
+    setStartAgain(true);
+
+  };
+
+  const stopReset = () => {
     setIsActive(false);
     setTime(0);
-
+  
   };
 
   const formatTime = () => {
@@ -66,6 +77,8 @@ export default function Chanter({ onButtonClick }) {
     color: darkMode ? "white" : "#0A132D"
   };
 
+  //recording
+
   const startRecording = async () => {
     setPret(false);
     setAudioURL("")
@@ -81,6 +94,7 @@ export default function Chanter({ onButtonClick }) {
       const url = URL.createObjectURL(audioBlob);
       setAudioURL(url);
       audioChunks.current = [];
+      uploadAudio(audioBlob);
     };
 
     mediaRecorder.current.start();
@@ -90,6 +104,26 @@ export default function Chanter({ onButtonClick }) {
     setRecording(false);
     mediaRecorder.current.stop();
   };
+
+  
+    // enregistrement sur base de données
+  const uploadAudio = async (audioBlob) => {
+    const formData = new FormData();
+    formData.append('audio', audioBlob, 'recording.wav');
+
+    try {
+      const response = await axios.post('http://localhost:5000/upload-audio', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log('Audio uploaded successfully:', response.data);
+    } catch (error) {
+      console.error('Error uploading audio:', error);
+    }
+  };
+
+
 
   const enregistrer = () => {
     setListeAudio(prevListeAudio => [...prevListeAudio, {
@@ -153,15 +187,24 @@ export default function Chanter({ onButtonClick }) {
           </div>
 
           <div className="text-3xl font-mono text-gray-700 mb-4">{formatTime()}</div>
+          
+            {showPret && <button onClick={() => { startRecording(); handleStart() }} className=" font-medium dark:bg-transparent bg-[#D5DAF3] h-16 w-48  rounded-full border-4 border-[#D5DAF3] dark:text-white text-xl dark:border-white text-[#0A132D] animate-bounce focus:animate-none hover:animate-none">
+              {/* <span class="ml-2">Prêt</span> */}
+               Prêt
+            </button>}
 
-          {showPret && <button onClick={() => { startRecording(); handleStart() }} className=" font-medium dark:bg-transparent bg-[#D5DAF3] h-16 w-48  rounded-full border-4 border-[#D5DAF3] dark:text-white text-xl dark:border-white text-[#0A132D] animate-bounce focus:animate-none hover:animate-none">
-            {/* <span class="ml-2">Prêt</span> */}
-            Prêt
-          </button>}
+            {isStartAgain && <h1 className=" text-[#0A132D]">Vous avez recommencé</h1>}
+              
+
 
           <div>
             {audioURL &&
-              <><input placeholder="titre" type="text" className="block w-full rounded-xl text-[#0A132D] appearance-none bg-white py-4 pl-4 pr-12 text-base text-slate-900 placeholder:text-slate-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setTitre(e.target.value)} /><audio src={audioURL} /></>
+
+              <>
+                  <input placeholder="titre" type="text" className="block w-full rounded-xl text-[#0A132D] appearance-none bg-white py-4 pl-4 pr-12 text-base text-slate-900 placeholder:text-slate-600 focus:outline-none sm:text-sm sm:leading-6" onChange={(e) => setTitre(e.target.value)} />
+                  <audio src={audioURL} />
+              </>
+
             }
           </div>
 
@@ -170,10 +213,10 @@ export default function Chanter({ onButtonClick }) {
             {/* eo amin io onClick io rehefa hanisy action amin ilay izy */}
             {/* Ireto ny icône eo ambany */}
             <Import size={40} {...commonProps} onClick={enregistrer} className="cursor-pointer" />
-            <RotateCw size={40} {...commonProps} className="cursor-pointer " onClick={() => { startRecording(); handleReset() }} />
+            <RotateCw size={40} {...commonProps} className="cursor-pointer " onClick={() => { startRecording(); handleReset() }}  disabled={!isActive}/>
             <Headphones size={40} {...commonProps} className="cursor-pointer" />
             <CircleStop size={40} {...commonProps} onClick={() => { stopRecording(); handlePause() }} className="cursor-pointer" />
-            <Trash2 size={40} {...commonProps} className="cursor-pointer" onClick={() => { setPret(true); setAudioURL("") }} />
+            <Trash2 size={40} {...commonProps} className="cursor-pointer" onClick={() => { setPret(true); setAudioURL("") ; stopReset() }} />
           </div>
 
         </div>
