@@ -5,6 +5,7 @@ import ispm from "../assets/ispm.png";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import MusicKeyFinder from "./../components/MusicKeyFinder";
+import KeyImport from "./../components/KeyImport";
 export default function Import() {
   const [darkMode, setDarkMode] = useState(false);
   const audioRef = useRef(null);
@@ -43,6 +44,7 @@ export default function Import() {
     // logo sy Menu
     <div className={`${darkMode && "dark"}`}>
       <MusicKeyFinder />
+      <KeyImport />
       <div className="dark: fixed h-screen w-full bg-[#C7CFE9] text-white dark:bg-[#0A132D]">
         <header className="sticky inset-x-0 top-4 z-50 flex w-full flex-wrap md:flex-nowrap md:justify-start">
           <nav

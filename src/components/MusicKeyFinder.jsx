@@ -196,7 +196,7 @@ const PitchDetector = () => {
   return (
     <div>
       <h1>Tonalité Détectée</h1>
-      <h2>{note.replace(/[0-9]/g, "")}</h2>
+      <h2>{note}</h2>
       <h3>Fréquence: {frequency.toFixed(2)} Hz</h3>
     </div>
   );
