@@ -3,7 +3,7 @@ import Meyda from "meyda";
 import { Sun, Moon, FileDown, Play, Pause } from "lucide-react";
 
 const KeyDetector = () => {
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState();
   const [key, setKey] = useState(null);
   const [error, setError] = useState("");
   const [audioContext, setAudioContext] = useState(null);

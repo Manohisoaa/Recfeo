@@ -58,18 +58,6 @@ const PitchDetector = () => {
     const frequencyToNote = (frequency) => {
       const noteFrequencies = {
         // Octave 0
-        Do0: 16.35,
-        "Do#0": 17.32,
-        Re0: 18.35,
-        "Re#0": 19.45,
-        Mi0: 20.6,
-        Fa0: 21.83,
-        "Fa#0": 23.12,
-        Sol0: 24.5,
-        "Sol#0": 25.96,
-        La0: 27.5,
-        "La#0": 29.14,
-        Si0: 30.87,
 
         // Octave 1
         Do1: 32.7,
