@@ -44,7 +44,6 @@ export default function Import() {
     // logo sy Menu
     <div className={`${darkMode && "dark"}`}>
       <MusicKeyFinder />
-      <KeyImport />
       <div className="dark: fixed h-screen w-full bg-[#C7CFE9] text-white dark:bg-[#0A132D]">
         <header className="sticky inset-x-0 top-4 z-50 flex w-full flex-wrap md:flex-nowrap md:justify-start">
           <nav
@@ -151,50 +150,10 @@ export default function Import() {
             </div>
           </nav>
         </header>
+        <KeyImport />
 
         {/* Micro sy bouton prêt   */}
-        <input
-          type="file"
-          accept="audio/*"
-          id="importSong"
-          style={{ display: "none" }}
-          onChange={handleImport}
-        />
-        <div className="flex h-5/6 items-center justify-center gap-44">
-          <div className="m-36 flex cursor-pointer rounded-full border-4 border-[#D5DAF3] bg-[#D5DAF3] p-10 dark:border-white dark:bg-white/5">
-            <button
-              onClick={() => document.getElementById("importSong").click()}
-            >
-              {darkMode ? (
-                <FileDown size={100} stroke-width={1.5} color="white" />
-              ) : (
-                <FileDown size={100} color="#0A132D" stroke-width={1.5} />
-              )}
-            </button>
-          </div>
-          <div className="flex h-2/4 w-1/5 flex-col items-center justify-center gap-20 rounded-xl bg-[#0A132D] dark:border-4 dark:border-white">
-            {song ? (
-              <div>
-                <p className="mt-20 text-white dark:text-white"> {song.name}</p>
-                <audio ref={audioRef}>
-                  <source src={audioSrc} type={song.type} />
-                </audio>
-              </div>
-            ) : (
-              <p className="mt-15 text-white dark:text-white"> ici le titre</p>
-            )}
-            <button
-              onClick={togglePlayPause}
-              className="cursor-pointer rounded-full border-4 border-[#D5DAF3] bg-transparent p-4 dark:border-white dark:bg-white/5"
-            >
-              {isPlaying ? (
-                <Pause size={30} {...commonProps} />
-              ) : (
-                <Play size={30} {...commonProps} />
-              )}
-            </button>
-          </div>
-        </div>
+
       </div>
     </div>
   );

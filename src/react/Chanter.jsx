@@ -149,7 +149,7 @@ export default function Chanter({ onButtonClick }) {
         {/* Micro sy bouton prêt   */}
         <div className="flex flex-col gap-5 items-center  h-5/6  ">
           <div className="p-10 flex bg-[#D5DAF3] dark:bg-white/5 rounded-full border-[#D5DAF3] dark:border-white border-4 m-20">
-            {darkMode ? <Mic size={100} stroke-width={1.5} color="white" /> : <Mic size={100} color="#0A132D" stroke-width={1.5} />}
+            {darkMode ? <Mic size={100} strokeWidth={1.5} color="white" /> : <Mic size={100} color="#0A132D" strokeWidth={1.5} />}
           </div>
 
           <div className="text-3xl font-mono text-gray-700 mb-4">{formatTime()}</div>

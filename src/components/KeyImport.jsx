@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Meyda from "meyda";
+import { Sun, Moon, FileDown, Play, Pause } from "lucide-react";
 
 const KeyDetector = () => {
   const [file, setFile] = useState(null);
@@ -10,6 +11,11 @@ const KeyDetector = () => {
   const [analyzerNode, setAnalyzerNode] = useState(null);
   const [meydaAnalyzer, setMeydaAnalyzer] = useState(null);
   const [chromaData, setChromaData] = useState([]); // Pour accumuler les données chroma
+  const [songName, setSongName] = useState('')
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [song, setSong] = useState(null);
+  const [audioSrc, setAudioSrc] = useState("");
 
   useEffect(() => {
     return () => {
@@ -27,6 +33,7 @@ const KeyDetector = () => {
     setSourceNode(null);
     setMeydaAnalyzer(null);
     const selectedFile = event.target.files[0];
+    setSongName(selectedFile.name)
     if (selectedFile) {
       // Réinitialisation des états avant de commencer une nouvelle analyse
       if (sourceNode) {
@@ -35,13 +42,11 @@ const KeyDetector = () => {
       if (meydaAnalyzer) {
         meydaAnalyzer.stop();
       }
-      setFile(null);
-      setKey(null);
-      setError("");
       setChromaData([]); // Réinitialise les données chroma accumulées
 
       // Début de la nouvelle analyse
       setFile(URL.createObjectURL(selectedFile));
+
       analyzeAudio(selectedFile);
     }
   };
@@ -198,12 +203,35 @@ const KeyDetector = () => {
   };
 
   return (
-    <div>
-      <h2>Détection de la tonalité d'une chanson</h2>
-      <input type="file" accept="audio/*" onChange={handleFileChange} />
-      {key && <p>Tonalité détectée : {key}</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-    </div>
+    <>
+      <div>
+        <input type="file" accept="audio/*" onChange={handleFileChange} id="importSong" style={{ display: "none" }} />
+        {key && <p>Tonalité détectée : {key}</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
+      </div>
+      <div className=" h-5/6 items-center justify-center gap-44 flex">
+        <div className="m-36 flex cursor-pointer rounded-full border-4 border-[#D5DAF3] bg-[#D5DAF3] p-10 dark:border-white dark:bg-white/5">
+          <button
+            onClick={() => document.getElementById("importSong").click()}
+          >
+
+            <FileDown size={100} color="#0A132D" strokeWidth={1.5} />
+          </button>
+        </div>
+        <div className="flex h-2/4 w-1/5 flex-col items-center justify-center gap-20 rounded-xl bg-[#0A132D] dark:border-4 dark:border-white">
+          {songName ? (
+            <div>
+              <p className="mt-15 text-white dark:text-white"> {songName}</p>
+              {key && <p className="mt-15 text-white dark:text-white">Tonalité détectée : {key}</p>}
+              {error && <p style={{ color: "red" }}>{error}</p>}
+            </div>
+          ) : (
+            <p className="mt-15 text-white dark:text-white"> ici le titre</p>
+          )}
+
+        </div>
+      </div>
+    </>
   );
 };
 
