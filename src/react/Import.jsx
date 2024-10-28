@@ -43,24 +43,23 @@ export default function Import() {
   return (
     // logo sy Menu
     <div className={`${darkMode && "dark"}`}>
-      <MusicKeyFinder />
       <div className="dark: fixed h-screen w-full bg-[#C7CFE9] text-white dark:bg-[#0A132D]">
-        <header className="sticky inset-x-0 top-4 z-50 flex w-full flex-wrap md:flex-nowrap md:justify-start">
+        <header className="top-4 md:flex-nowrap md:justify-start sticky inset-x-0 z-50 flex flex-wrap w-full">
           <nav
             className="relative mx-2 w-full max-w-[66rem] rounded-[28px] bg-[#D5DAF3] p-3 dark:bg-white/5 md:flex md:items-center md:justify-between md:py-0 lg:mx-auto"
             aria-label="Global"
           >
             <div className="flex items-center justify-between">
               <a
-                className="flex items-center justify-between rounded-md text-xl font-semibold focus:opacity-80 focus:outline-none"
+                className="focus:opacity-80 focus:outline-none flex items-center justify-between text-xl font-semibold rounded-md"
                 href="#"
                 aria-label="Preline"
               >
-                <img src={ispm} className="ml-2 mt-2 h-14 rounded-full" />
+                <img src={ispm} className="h-14 mt-2 ml-2 rounded-full" />
                 {darkMode ? (
-                  <img src={logo} className="m-2 h-12" />
+                  <img src={logo} className="h-12 m-2" />
                 ) : (
-                  <img src={logodark} className="m-3 h-10" />
+                  <img src={logodark} className="h-10 m-3" />
                 )}
                 <p className="text-center font-bold text-[#0A132D] dark:text-white">
                   Rec'feo
@@ -70,7 +69,7 @@ export default function Import() {
               <div className="md:hidden">
                 <button
                   type="button"
-                  className="hs-collapse-toggle flex size-8 items-center justify-center rounded-full bg-neutral-800 text-sm font-semibold text-white disabled:pointer-events-none disabled:opacity-50"
+                  className="hs-collapse-toggle size-8 bg-neutral-800 disabled:pointer-events-none disabled:opacity-50 flex items-center justify-center text-sm font-semibold text-white rounded-full"
                   data-hs-collapse="#navbar-collapse"
                   aria-controls="navbar-collapse"
                   aria-label="Toggle navigation"
@@ -92,7 +91,7 @@ export default function Import() {
                     <line x1="3" x2="21" y1="18" y2="18" />
                   </svg>
                   <svg
-                    className="hs-collapse-open:block hidden size-4 flex-shrink-0"
+                    className="hs-collapse-open:block size-4 flex-shrink-0 hidden"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -112,9 +111,9 @@ export default function Import() {
 
             <div
               id="navbar-collapse"
-              className="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 md:block"
+              className="hs-collapse grow basis-full md:block hidden overflow-hidden transition-all duration-300"
             >
-              <div className="md:ps- flex flex-col py-2 md:flex-row md:items-center md:justify-end md:py-0">
+              <div className="md:ps- md:flex-row md:items-center md:justify-end md:py-0 flex flex-col py-2">
                 <Link
                   className="group p-2 px-4 py-3 ps-px font-raleway text-sm font-bold text-[#0A132D] hover:text-black hover:text-white focus:text-black focus:text-white focus:outline-none dark:text-white dark:hover:text-[#C7CFE9] sm:px-3 md:py-4"
                   to="/chanter"
@@ -153,7 +152,6 @@ export default function Import() {
         <KeyImport />
 
         {/* Micro sy bouton prêt   */}
-
       </div>
     </div>
   );
