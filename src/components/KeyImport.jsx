@@ -192,7 +192,7 @@ const KeyDetector = () => {
     };
 
     // Nettoyage à la désinstallation du composant
-    return () => {};
+    return () => { };
   }, []);
 
   useEffect(() => {
